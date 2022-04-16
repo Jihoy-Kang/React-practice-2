@@ -5,6 +5,9 @@ import { Button, Navbar, Nav, NavDropdown, Form, FormControl  } from 'react-boot
 import logo from './logo.svg';
 import './App.css';
 import data from './data.js';
+import Detail from './detail.js';
+import { Link, Route, Switch } from 'react-router-dom'
+
 
 function App() {
   let [shoes,shoes변경] = useState(data)
@@ -15,8 +18,8 @@ function App() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
+            <Nav.Link><Link to='/'>Home</Link></Nav.Link>
+            <Nav.Link><Link to='/detail'>Detail</Link></Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -31,28 +34,39 @@ function App() {
           </Form>
         </Navbar.Collapse>
       </Navbar>
-      <div className='background'>
-        <h1>20% Season Off</h1>
-        <p>
-          This is a simple hero unit, a simple jumbotron-style component for calling
-          extra attention to featured content or information.
-        </p>
-        <p>
-          <Button variant="primary">Learn more</Button>
-        </p>
-      </div>
-      <div className="container">
-        <div className="row">
-          {
-            shoes.map((a, i)=>{
-              return (
-                <ShoeList data={shoes[i]} i={i} key={i} />
-              )
-            })
-          }
 
+      <Switch>
+        <Route exact path="/">
+          <div className='background'>
+            <h1>20% Season Off</h1>
+            <p>
+              This is a simple hero unit, a simple jumbotron-style component for calling
+              extra attention to featured content or information.
+            </p>
+            <p>
+              <Button variant="primary">Learn more</Button>
+            </p>
+          </div>
+          <div className="container">
+          <div className="row">
+            {
+              shoes.map((a, i)=>{
+                return (
+                  <ShoeList data={shoes[i]} i={i} key={i} />
+                )
+              })
+            }
+
+          </div>
         </div>
-      </div>
+        </Route>
+        <Route path="/detail">
+          <Detail shoes={shoes}/>
+        </Route>
+      </Switch>
+      
+
+      
 
     </div>
   );
@@ -70,3 +84,5 @@ function App() {
 }
 
 export default App;
+
+
