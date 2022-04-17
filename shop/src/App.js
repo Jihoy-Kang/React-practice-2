@@ -47,20 +47,20 @@ function App() {
               <Button variant="primary">Learn more</Button>
             </p>
           </div>
-          <div className="container">
-          <div className="row">
-            {
-              shoes.map((a, i)=>{
-                return (
-                  <ShoeList data={shoes[i]} i={i} key={i} />
-                )
-              })
-            }
+          {<div className="container">
+            <div className="row">
+              {
+                shoes.map((a, i)=>{
+                  return (
+                    <ShoeList data={shoes[i]} i={i} key={i} />
+                  )
+                })
+              }
 
-          </div>
-        </div>
+            </div>
+          </div>}
         </Route>
-        <Route path="/detail">
+        <Route path="/detail/:id">
           <Detail shoes={shoes}/>
         </Route>
       </Switch>
@@ -74,11 +74,11 @@ function App() {
   function ShoeList(props){
 
     return(
-      <div className="col-md-4">
+      <div className="col-md-4"><Link to={'/detail/'+(props.data.id)}>
         <img src={"https://codingapple1.github.io/shop/shoes"+(props.i+1)+".jpg"} width="100%" />
         <h4>{props.data.title}</h4>
-        <p>{props.data.content} & {props.data.price}</p>
-      </div>
+        <p>{props.data.content}</p>
+      </Link></div>
     )
   }
 }
