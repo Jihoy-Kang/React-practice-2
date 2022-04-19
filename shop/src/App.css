@@ -6,6 +6,14 @@
   height: 40vmin;
   pointer-events: none;
 }
+.my-alert {
+  background : #eeeeee;
+  padding : 15px;
+  border-radius : 5px;
+  max-width : 500px;
+  width : 100%;
+  margin : auto;
+}
 
 .background {
   background-image : url('./background.jpg');

@@ -6,8 +6,6 @@ import reportWebVitals from './reportWebVitals';
 
 import {BrowserRouter} from 'react-router-dom'
 
-
-
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -16,7 +14,6 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
 
 
 // If you want to start measuring performance in your app, pass a function
