@@ -1,5 +1,5 @@
 /* esLint disable */
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { Button, Navbar, Nav, NavDropdown, Form, FormControl  } from 'react-bootstrap';
 
 import logo from './logo.svg';
@@ -7,10 +7,13 @@ import './App.css';
 import data from './data.js';
 import Detail from './detail.js';
 import { Link, Route, Switch } from 'react-router-dom'
+import Cart from './cart.js';
 
+export let 재고context = React.createContext();
 
 function App() {
   let [shoes,shoes변경] = useState(data)
+  let [재고,재고변경] =useState([10,11,12])
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
@@ -47,6 +50,7 @@ function App() {
               <Button variant="primary">Learn more</Button>
             </p>
           </div>
+          <재고context.Provider value={재고}>
           {<div className="container">
             <div className="row">
               {
@@ -59,9 +63,17 @@ function App() {
 
             </div>
           </div>}
+          </재고context.Provider>
         </Route>
+        
         <Route path="/detail/:id">
-          <Detail shoes={shoes}/>
+          <재고context.Provider value={재고}>
+            <Detail shoes={shoes}/>
+          </재고context.Provider>
+        </Route>
+
+        <Route path='/cart'>
+          <Cart></Cart>
         </Route>
       </Switch>
       
@@ -73,11 +85,14 @@ function App() {
 
   function ShoeList(props){
 
+    let 재고 = useContext(재고context)
+    
     return(
       <div className="col-md-4"><Link to={'/detail/'+(props.data.id)}>
         <img src={"https://codingapple1.github.io/shop/shoes"+(props.i+1)+".jpg"} width="100%" />
         <h4>{props.data.title}</h4>
         <p>{props.data.content}</p>
+        {재고}
       </Link></div>
     )
   }

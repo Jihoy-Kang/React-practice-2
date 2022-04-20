@@ -1,14 +1,18 @@
 
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import './App.css';
 import { useHistory, useParams } from 'react-router-dom'
+
+import {재고context} from './App.js'
+import { connect } from 'react-redux';
 
 import App from './App';
 
 
 function Detail(props){
 
-    
+    let 재고 = useContext(재고context)
+
     let [alert,alert변경] = useState(true)
     let history = useHistory();
 
@@ -40,7 +44,12 @@ function Detail(props){
                 <h4 className="pt-5">{props.shoes[id].title}</h4>
                 <p>{props.shoes[id].content}</p>
                 <p>{props.shoes[id].price}원</p>
-                <button className="btn btn-danger">주문하기</button> 
+                {재고}
+
+                <button className="btn btn-danger" onClick={()=>{
+                    props.dispatch({type :'항목추가', payload : {id:props.shoes[id].id, name: props.shoes[id].title, quantity :1}})
+                    history.push('/cart')
+                }}>주문하기</button> 
 
                 <button className="btn btn-danger" onClick={()=>{
                     history.goBack();
@@ -64,4 +73,12 @@ class LifecycleHook extends React.Component {
     }
   }
 
-export default Detail
+function 함수명(state){ //redux store데이터를  props화 해주는 함수
+    return{
+        
+        state : state.reducer,
+        alertState : state.reducer2
+    }
+}
+
+export default connect(함수명)(Detail)
