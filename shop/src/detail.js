@@ -25,6 +25,33 @@ function Detail(props){
     },[ ])
     
     let { id } = useParams();
+
+    useEffect(()=>{
+        let arr = localStorage.getItem('watched')
+        if(arr == null){
+            arr = []
+        }else{
+            arr = JSON.parse(arr)
+        }
+        
+        arr.push(id)
+        arr = new Set(arr) //set자료형은 중복을 허용하지 않는다.
+        arr = [...arr]
+
+        localStorage.setItem('watched',JSON.stringify(arr))
+    })
+    
+/*     if(JSON.parse(localStorage.getItem('watched') == null)){
+        localStorage.setItem('watched',JSON.stringify([id]))
+    }else {
+        let recentItem = JSON.parse(localStorage.getItem('watched'))
+        if(recentItem.indexOf(id) < 0){
+            recentItem.push(id)
+            localStorage.setItem('watched',JSON.stringify(recentItem) )
+        }
+    
+    } */
+
     return (
         
         <div className="container">

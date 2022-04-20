@@ -99,5 +99,23 @@ function App() {
 }
 
 export default App;
+/* 
+localStorage 사용문법 3가지
+localStorage.setItem('name','kim')
+localStorage.getItem('name')
+localStorage.removeItem('name')
 
+**객체, 배열 저장시
+localStorage.setItem('obj',{name : 'kim'}) 이러면 자료가 깨진다.
+localStorage.setItem('arr',[1,2,3]) 이러면 자료가 깨진다.
 
+그래서 
+localStorage.setItem('obj', JSON.stringify({name : 'kim'})) 
+localStorage.setItem('arr',JSON.stringify([1,2,3]))
+이렇게 JSON형식으로 저장한다.
+
+불러올때는
+let a = localStorage.getItem('obj')
+let b = localStorage.getItem('arr')
+JSON.parse(a)
+JSON.parse(b) */
